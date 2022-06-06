@@ -4,7 +4,7 @@ import com.platzi.market.domain.Product;
 
 import java.util.List;
 import java.util.Optional;
-// Toma los métodos implementados en ProductoRepository
+// Toma los métodos implementados son los orientados al dominio
 public interface ProductRepository {
     List<Product> getAll();
     Optional<List<Product>> getByCategory(int categoryId);

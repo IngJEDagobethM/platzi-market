@@ -16,6 +16,6 @@ public interface CategoryMapper {
     })
     Category toCategory(Categoria categoria);  // El nombre del método debe ser [toNameClassToReturn]
     @InheritInverseConfiguration
-    @Mapping(source = "productos", target = "", ignore = true)
+    @Mapping(target = "productos", ignore = true)
     Categoria toCategoria(Category category);
 }
