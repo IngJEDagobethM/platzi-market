@@ -12,6 +12,7 @@ public class CompraProducto {
     private BigDecimal total;
     private Boolean estado;
     @ManyToOne
+    @MapsId("idCompra") // Para guardar en cascada se indica la llave primaria de la relación dominante (Compra.idCompra).
     @JoinColumn(name = "id_compra", insertable = false, updatable = false)
     private Compra compra;
     @ManyToOne
@@ -48,5 +49,21 @@ public class CompraProducto {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 }
