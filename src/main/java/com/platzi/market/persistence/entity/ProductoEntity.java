@@ -4,31 +4,31 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "productos")
-public class Producto {
+@Table(name = "productos", schema = "public")
+public class ProductoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
-    private Integer idProducto;
+    private Long idProducto;
     private String nombre;
     @Column(name = "id_categoria")
-    private Integer idCategoria;
+    private Long idCategoria;
     @Column(name = "codigo_barras")
     private String codigoBarras;
     @Column(name = "precio_venta")
     private BigDecimal precioVenta;
     @Column(name = "cantidad_stock")
-    private Integer cantidadStock;
+    private Long cantidadStock;
     private Boolean estado;
     @ManyToOne
     @JoinColumn(name = "id_categoria", insertable = false, updatable = false) // el name del joincolumn debe ser la columna de la BD.
-    private Categoria categoria; // insertable and updatable no permite que se registren/eliminen/actualicen categorias desde productos.
+    private CategoriaEntity categoria; // insertable and updatable no permite que se registren/eliminen/actualicen categorias desde productos.
 
-    public Integer getIdProducto() {
+    public Long getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(Integer idProducto) {
+    public void setIdProducto(Long idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -40,11 +40,11 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Integer getIdCategoria() {
+    public Long getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(Integer idCategoria) {
+    public void setIdCategoria(Long idCategoria) {
         this.idCategoria = idCategoria;
     }
 
@@ -64,11 +64,11 @@ public class Producto {
         this.precioVenta = precioVenta;
     }
 
-    public Integer getCantidadStock() {
+    public Long getCantidadStock() {
         return cantidadStock;
     }
 
-    public void setCantidadStock(Integer cantidadStock) {
+    public void setCantidadStock(Long cantidadStock) {
         this.cantidadStock = cantidadStock;
     }
 
@@ -80,11 +80,11 @@ public class Producto {
         this.estado = estado;
     }
 
-    public Categoria getCategoria() {
+    public CategoriaEntity getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(CategoriaEntity categoria) {
         this.categoria = categoria;
     }
 }

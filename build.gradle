@@ -20,7 +20,8 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.0.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.0.Final'
 
-	runtimeOnly 'org.postgresql:postgresql'
+	//runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'mysql:mysql-connector-java'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

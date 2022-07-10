@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "categorias")
-public class Categoria {
+@Table(name = "categorias", schema = "public")
+public class CategoriaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria")
-    private Integer idCategoria;
+    private Long idCategoria;
     private String descripcion;
     private String estado;
     @OneToMany(mappedBy = "categoria") // se mapea el atributo que corresponde a la relación en la clase producto.
-    private List<Producto> productos;
+    private List<ProductoEntity> productoEntities;
 
-    public Integer getIdCategoria() {
+    public Long getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(Integer idCategoria) {
+    public void setIdCategoria(Long idCategoria) {
         this.idCategoria = idCategoria;
     }
 
@@ -39,11 +39,11 @@ public class Categoria {
         this.estado = estado;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public List<ProductoEntity> getProductos() {
+        return productoEntities;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setProductos(List<ProductoEntity> productoEntities) {
+        this.productoEntities = productoEntities;
     }
 }

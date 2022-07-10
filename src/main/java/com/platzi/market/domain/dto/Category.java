@@ -1,15 +1,15 @@
-package com.platzi.market.domain;
+package com.platzi.market.domain.dto;
 
 public class Category {
-    private int categoryId;
+    private Long categoryId;
     private String category;
     private boolean active;
 
-    public int getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

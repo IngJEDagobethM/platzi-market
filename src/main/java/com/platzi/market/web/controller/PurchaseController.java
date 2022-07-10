@@ -1,6 +1,6 @@
 package com.platzi.market.web.controller;
 
-import com.platzi.market.domain.Purchase;
+import com.platzi.market.domain.dto.Purchase;
 import com.platzi.market.domain.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class PurchaseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Purchase>> getByClient(String clientId){
+    public ResponseEntity<List<Purchase>> getByClient(@PathVariable(value = "id") Long clientId){
         return purchaseService.getByClient(clientId).map(
                 purchases -> new ResponseEntity<>(purchases, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

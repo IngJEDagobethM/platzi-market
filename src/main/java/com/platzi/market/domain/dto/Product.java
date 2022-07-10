@@ -1,21 +1,21 @@
-package com.platzi.market.domain;
+package com.platzi.market.domain.dto;
 
 import java.math.BigDecimal;
 
 public class Product {
-    private int productId;
+    private Long productId;
     private String name;
     private int categoryId;
     private BigDecimal price;
-    private int stock;
+    private Long stock;
     private boolean active;
     private Category category;
 
-    public int getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -43,11 +43,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getStock() {
+    public Long getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Long stock) {
         this.stock = stock;
     }
 

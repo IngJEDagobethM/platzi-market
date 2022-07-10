@@ -1,6 +1,6 @@
 package com.platzi.market.web.controller;
 
-import com.platzi.market.domain.Product;
+import com.platzi.market.domain.dto.Product;
 import com.platzi.market.domain.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -37,15 +37,16 @@ public class ProductController {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 404, message = "Product not found")
     })
-    public ResponseEntity<Product> getProduct(@ApiParam(value = "The ID of the product.", required = true, example = "7")
-                                                  @PathVariable("id") int productId){
+    public ResponseEntity<Product> getProduct(
+            @ApiParam(value = "The ID of the product.", required = true, example = "7")
+            @PathVariable("id") Long productId){
         return productService.getProduct(productId).map(
                 product -> new ResponseEntity<>(product, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/category/{id}")
-    public ResponseEntity<List<Product>> getByCategory(@PathVariable("id") int categoryId){
+    public ResponseEntity<List<Product>> getByCategory(@PathVariable("id") Long categoryId){
         return productService.getByCategory(categoryId).map(
                 products -> new ResponseEntity<>(products, HttpStatus.OK)
         ).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -57,7 +58,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") int productId){
+    public ResponseEntity delete(@PathVariable("id") Long productId){
         return productService.delete(productId) ?
                 new ResponseEntity(HttpStatus.OK) :
                 new ResponseEntity(HttpStatus.NOT_FOUND);

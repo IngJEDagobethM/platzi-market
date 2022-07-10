@@ -4,20 +4,20 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "compras_productos")
-public class CompraProducto {
+@Table(name = "compras_productos", schema = "public")
+public class CompraProductoEntity {
     @EmbeddedId
     private CompraProductoPK id;
-    private Integer cantidad;
-    private BigDecimal total;
+    private Long cantidad;
+    private double total;
     private Boolean estado;
     @ManyToOne
     @MapsId("idCompra") // Para guardar en cascada se indica la llave primaria de la relación dominante (Compra.idCompra).
     @JoinColumn(name = "id_compra", insertable = false, updatable = false)
-    private Compra compra;
+    private CompraEntity compraEntity;
     @ManyToOne
     @JoinColumn(name = "id_producto", insertable = false, updatable = false)
-    private Producto producto;
+    private ProductoEntity productoEntity;
 
     public CompraProductoPK getId() {
         return id;
@@ -27,19 +27,19 @@ public class CompraProducto {
         this.id = id;
     }
 
-    public Integer getCantidad() {
+    public Long getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Long cantidad) {
         this.cantidad = cantidad;
     }
 
-    public BigDecimal getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
@@ -51,19 +51,19 @@ public class CompraProducto {
         this.estado = estado;
     }
 
-    public Compra getCompra() {
-        return compra;
+    public CompraEntity getCompra() {
+        return compraEntity;
     }
 
-    public void setCompra(Compra compra) {
-        this.compra = compra;
+    public void setCompra(CompraEntity compraEntity) {
+        this.compraEntity = compraEntity;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public ProductoEntity getProducto() {
+        return productoEntity;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setProducto(ProductoEntity productoEntity) {
+        this.productoEntity = productoEntity;
     }
 }

@@ -1,9 +1,9 @@
 package com.platzi.market.persistence;
 
-import com.platzi.market.domain.Purchase;
+import com.platzi.market.domain.dto.Purchase;
 import com.platzi.market.domain.repository.PurchaseRepository;
 import com.platzi.market.persistence.crud.CompraCrudRepository;
-import com.platzi.market.persistence.entity.Compra;
+import com.platzi.market.persistence.entity.CompraEntity;
 import com.platzi.market.persistence.mapper.PurchaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,19 +25,20 @@ public class CompraRepository implements PurchaseRepository {
 
     @Override
     public List<Purchase> getAll() {
-        return mapper.toPurchases((List<Compra>) compraCrudRepository.findAll());
+        return mapper.toPurchases((List<CompraEntity>) compraCrudRepository.findAll());
     }
 
     @Override
-    public Optional<List<Purchase>> getByClient(String clientId) {
+    public Optional<List<Purchase>> getByClient(Long clientId) {
         return compraCrudRepository.findByIdCliente(clientId)
                 .map(compras -> mapper.toPurchases(compras));
     }
 
     @Override
     public Purchase save(Purchase purchase) {
-        Compra compra = mapper.toCompra(purchase);
-        compra.getProductos().forEach(compraProducto -> compraProducto.setCompra(compra));
-        return mapper.toPurchase(compra);
+        CompraEntity compraEntity = mapper.toCompra(purchase);
+        compraEntity.getProductos().forEach(compraProducto -> compraProducto.setCompra(compraEntity));
+        compraCrudRepository.save(compraEntity);
+        return mapper.toPurchase(compraEntity);
     }
 }

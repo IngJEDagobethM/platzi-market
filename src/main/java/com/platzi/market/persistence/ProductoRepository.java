@@ -1,9 +1,9 @@
 package com.platzi.market.persistence;
 
-import com.platzi.market.domain.Product;
+import com.platzi.market.domain.dto.Product;
 import com.platzi.market.domain.repository.ProductRepository;
 import com.platzi.market.persistence.crud.ProductoCrudRepository;
-import com.platzi.market.persistence.entity.Producto;
+import com.platzi.market.persistence.entity.ProductoEntity;
 import com.platzi.market.persistence.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,24 +24,24 @@ public class ProductoRepository implements ProductRepository {
 
     @Override
     public List<Product> getAll(){
-        List<Producto> productos = (List<Producto>) productoCrudRepository.findAll();
-        return mapper.toProducts(productos);
+        List<ProductoEntity> productoEntities = (List<ProductoEntity>) productoCrudRepository.findAll();
+        return mapper.toProducts(productoEntities);
     }
 
     @Override
-    public Optional<List<Product>> getByCategory(int categoryId) {
-        List<Producto> productos = productoCrudRepository.findByIdCategoriaOrderByNombreAsc(categoryId);
-        return Optional.of(mapper.toProducts(productos));
+    public Optional<List<Product>> getByCategory(Long categoryId) {
+        List<ProductoEntity> productoEntities = productoCrudRepository.findByIdCategoriaOrderByNombreAsc(categoryId);
+        return Optional.of(mapper.toProducts(productoEntities));
     }
 
     @Override
-    public Optional<List<Product>> getScarseProducts(int quantity) {
-        Optional<List<Producto>> productos = productoCrudRepository.findByCantidadStockLessThanAndEstadoIsTrue(quantity);
+    public Optional<List<Product>> getScarseProducts(Long quantity) {
+        Optional<List<ProductoEntity>> productos = productoCrudRepository.findByCantidadStockLessThanAndEstadoIsTrue(quantity);
         return productos.map(prods -> mapper.toProducts(prods)); // Retorna un Optional de la traducción
     }
 
     @Override
-    public Optional<Product> getProduct(int productID) {
+    public Optional<Product> getProduct(Long productID) {
         return productoCrudRepository.findById(productID).map(prods -> mapper.toProduct(prods));
     }
 
@@ -51,14 +51,14 @@ public class ProductoRepository implements ProductRepository {
                 productoCrudRepository.save(mapper.toProducto(product)));
     }
 
-    public Optional<List<Producto>> getResagados(double precioVenta, int cantidadStock){
+    public Optional<List<ProductoEntity>> getResagados(double precioVenta, Long cantidadStock){
         return productoCrudRepository
                 .findByPrecioVentaLessThanAndCantidadStockGreaterThanAndEstadoIsTrue(precioVenta,
                         cantidadStock);
     }
 
     @Override
-    public void delete(int porductID){
-        productoCrudRepository.deleteById(porductID);
+    public void delete(Long productID){
+        productoCrudRepository.deleteById(productID);
     }
 }

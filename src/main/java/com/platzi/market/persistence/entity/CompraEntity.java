@@ -5,38 +5,38 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "compras")
-public class Compra {
+@Table(name = "compras", schema = "public")
+public class CompraEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
-    private Integer idCompra;
+    private Long idCompra;
     @Column(name = "id_cliente")
-    private Integer idCliente;
+    private Long idCliente;
     private LocalDateTime fecha;
     @Column(name = "medio_pago")
     private String medioPago;
     private String comentario;
     private String estado;
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
-    private Cliente cliente;
-    @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL})
-    private List<CompraProducto> productos;
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
+    private ClienteEntity clienteEntity;
+    @OneToMany(mappedBy = "compraEntity", cascade = {CascadeType.ALL})
+    private List<CompraProductoEntity> productos;
 
-    public Integer getIdCompra() {
+    public Long getIdCompra() {
         return idCompra;
     }
 
-    public void setIdCompra(Integer idCompra) {
+    public void setIdCompra(Long idCompra) {
         this.idCompra = idCompra;
     }
 
-    public Integer getIdCliente() {
+    public Long getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -72,19 +72,19 @@ public class Compra {
         this.estado = estado;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public ClienteEntity getCliente() {
+        return clienteEntity;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(ClienteEntity clienteEntity) {
+        this.clienteEntity = clienteEntity;
     }
 
-    public List<CompraProducto> getProductos() {
+    public List<CompraProductoEntity> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<CompraProducto> productos) {
+    public void setProductos(List<CompraProductoEntity> productos) {
         this.productos = productos;
     }
 }

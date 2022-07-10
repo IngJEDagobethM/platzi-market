@@ -1,30 +1,30 @@
-package com.platzi.market.domain;
+package com.platzi.market.domain.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Purchase {
-    private int purchaseId;
-    private String clientId;
+    private Long purchaseId;
+    private Long clientId;
     private LocalDateTime date;
     private String paymentMethod;
     private String comment;
     private String state;
     private List<PurchaseItem> items;
 
-    public int getPurchaseId() {
+    public Long getPurchaseId() {
         return purchaseId;
     }
 
-    public void setPurchaseId(int purchaseId) {
+    public void setPurchaseId(Long purchaseId) {
         this.purchaseId = purchaseId;
     }
 
-    public String getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 

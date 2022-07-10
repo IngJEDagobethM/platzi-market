@@ -1,7 +1,7 @@
 package com.platzi.market.persistence.mapper;
 
-import com.platzi.market.domain.Purchase;
-import com.platzi.market.persistence.entity.Compra;
+import com.platzi.market.domain.dto.Purchase;
+import com.platzi.market.persistence.entity.CompraEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,9 +20,9 @@ public interface PurchaseMapper {
             @Mapping(source = "estado", target = "state"),
             @Mapping(source = "productos", target = "items"),
     })
-    Purchase toPurchase(Compra compra);
-    List<Purchase> toPurchases(List<Compra> compras);
+    Purchase toPurchase(CompraEntity compraEntity);
+    List<Purchase> toPurchases(List<CompraEntity> compraEntities);
     @InheritInverseConfiguration
     @Mapping(target = "cliente", ignore = true)
-    Compra toCompra(Purchase purchase);
+    CompraEntity toCompra(Purchase purchase);
 }

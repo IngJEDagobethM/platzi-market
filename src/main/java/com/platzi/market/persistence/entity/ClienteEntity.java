@@ -4,26 +4,28 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "clientes")
-public class Cliente {
+@Table(name = "clientes", schema = "public")
+public class ClienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer idCliente;
+    private Long idCliente;
+    /*@Column(name = "identificacion")
+    private String identificacion;
+    */
     private String nombre;
-    private String apellido;
-    private Integer celular;
+    private String apellidos;
+    private String celular;
     private String direccion;
     @Column(name = "correo_electronico")
     private String correoElectronico;
-    @OneToMany(mappedBy = "cliente")
-    private List<Compra> compras;
-
-    public Integer getId() {
+    @OneToMany(mappedBy = "clienteEntity")
+    private List<CompraEntity> compraEntities;
+    public Long getId() {
         return idCliente;
     }
 
-    public void setId(Integer idCliente) {
+    public void setId(Long idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -35,19 +37,19 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public Integer getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(Integer celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 
